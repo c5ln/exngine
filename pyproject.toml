@@ -1,0 +1,28 @@
+[project]
+name = "exngine"
+version = "0.1.0"
+description = "Experience Search Engine — 흩어진 경험 기록을 통합 검색해 자소서 소재를 찾는다"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "typer>=0.12",
+    "pydantic>=2.5",
+    "httpx>=0.27",
+    "keyring>=25",
+    "sqlite-vec>=0.1.6",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+# 로컬 임베딩(BGE-m3) 백엔드. 무거우므로 별도 설치: pip install -e ".[embed]"
+embed = ["sentence-transformers>=3.0"]
+
+[project.scripts]
+exngine = "exngine.cli:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["exngine"]
